@@ -48,7 +48,7 @@ load_var.iamc.template <- function(x, sheetvar = "variable definitions", colvar 
     variables = openxlsx::read.xlsx(x$filename, sheet = sheetidx, startRow = firstrow, cols = colvar,
         colNames = F)
 
-    units = openxlsx::read.xlsx(x$filename, sheetidx, startRow = firstrow, cols = colunit, colNames = F)
+    units = openxlsx::read.xlsx(x$filename, sheetidx, startRow = firstrow, cols = colunit, colNames = F, skipEmptyRows = F)
     xls.var = data.frame(var = as.character(variables[, 1]), unit = as.character(units[, 1]))
 
     # coeff
@@ -141,7 +141,7 @@ save_xls.iamc.template <- function(x, .gdx.data, .iamc.vars, model_name,
     # ensure data.table
     .gdx.data = data.table(.gdx.data)
     .iamc.vars = data.table(.iamc.vars)
-    
+
     # remove potential double entries in the template
     .iamc.vars = unique(.iamc.vars)
 
